@@ -67,7 +67,6 @@ describe('Teste Api Rarodb', () => {
       url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/search?title=troia',   
     }).then((response) => {
       expect(response.status).to.eq(200)
-      console.log(response.body)
   
     })
   })
