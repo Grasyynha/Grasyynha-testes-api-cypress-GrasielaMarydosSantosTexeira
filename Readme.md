@@ -1,4 +1,4 @@
-<h1>Atividade 3 - Testes de API com Cypress</h1>
+# Atividade 3 - Testes de API com Cypress
 O objetivo desta atividade é avaliar os conhecimentos absorvidos sobre o desenvolvimento de testes de API
 com o framework Cypress.
 Para resolver os seguintes desafios, vocês deverão utilizar todo o conhecimento aprendido em sala de aula
