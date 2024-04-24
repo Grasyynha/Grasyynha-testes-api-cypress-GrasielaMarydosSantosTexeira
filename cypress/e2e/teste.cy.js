@@ -7,6 +7,7 @@ describe('Teste Api Rarodb', () => {
   let userId
   let token
 
+
   it('Deve criar um usuário', () => {
     cy.request('POST', 'https://raromdb-3c39614e42d4.herokuapp.com/api/users', {
       name: fakeName,
@@ -49,28 +50,40 @@ describe('Teste Api Rarodb', () => {
 
     })
   })
-  it('Deve listar todos os filmes', () => {
-    cy.request({
-      method: 'GET',
-      url:'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/50',   
-    }).then((response) => {
-      expect(response.status).to.eq(200)
-      
-      cy.wrap(response.body.id).should('eq', 50);
-     
-    })
-  })
 
+  it('Deve criar um filme com sucesso', function () {
+    // Dados para criar um filme
+    const newMovie = {
+      title: '"Mr nobody"', // Defina um título para o filme
+      genre: 'Desenho', // Defina um gênero
+      description: 'Xmen', // Descrição do filme
+      durationInMinutes: 120, // Duração do filme em minutos
+      releaseYear: 2007, // Ano de lançamento
+    };
+  
+   
+    cy.request({
+      method: 'POST',
+      url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies',
+      body: newMovie,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+      },
+    }).then((response) => {
+      expect(response.status).to.equal(201); 
+      expect(response.body).to.have.property('id');
+      movieId = response.body.id; 
+    });
+  });
+  
   it('Deve buscar um filme passado na url', () => {
     cy.request({
       method: 'GET',
       url: 'https://raromdb-3c39614e42d4.herokuapp.com/api/movies/search?title=troia',   
     }).then((response) => {
       expect(response.status).to.eq(200)
-      console.log(response.body)
   
     })
   })
-
-
 })
